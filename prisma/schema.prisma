@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+enum Role {
+  super_admin
+  teacher
+  student
+}
+
+enum CourseStatus {
+  draft
+  published
+}
+
+enum PaymentStatus {
+  pending
+  approved
+  rejected
+}
+
+enum SessionStatus {
+  scheduled
+  completed
+  cancelled
+  no_show
+}
+
+model User {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  email      String   @unique
+  full_name  String
+  role       Role     @default(student)
+  bio        String?  @db.Text
+  specialty  String?  // Ej: Biología, Matemáticas (para docentes)
+  created_at DateTime @default(now())
+
+  // Relaciones
+  subjects_taught    Subject[]     @relation("TeacherSubjects")
+  enrollments        Enrollment[]
+  sessions_as_student PrivateSession[] @relation("StudentSessions")
+  sessions_as_teacher PrivateSession[] @relation("TeacherSessions")
+}
+
+model Career {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title       String
+  description String?  @db.Text
+  created_at  DateTime @default(now())
+
+  subjects Subject[]
+}
+
+model Subject {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  career_id   String   @db.Uuid
+  teacher_id  String?  @db.Uuid  // Mentor principal de la materia
+  title       String
+  description String?  @db.Text
+  price       Float    @default(0) // Precio si se vende invididualmente
+  created_at  DateTime @default(now())
+
+  career      Career           @relation(fields: [career_id], references: [id])
+  teacher     User?            @relation("TeacherSubjects", fields: [teacher_id], references: [id])
+  topics      Topic[]
+  enrollments Enrollment[]
+  sessions    PrivateSession[]
+}
+
+model Topic {
+  id         String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  subject_id String   @db.Uuid
+  title      String
+  order      Int      @default(0)
+  created_at DateTime @default(now())
+
+  subject Subject  @relation(fields: [subject_id], references: [id])
+  lessons Lesson[]
+}
+
+model Lesson {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  topic_id    String   @db.Uuid
+  title       String
+  content_url String?  // Link a video de Mux o PDF
+  description String?  @db.Text
+  order       Int      @default(0)
+  created_at  DateTime @default(now())
+
+  topic Topic @relation(fields: [topic_id], references: [id])
+}
+
+model PrivateSession {
+  id          String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  student_id  String        @db.Uuid
+  teacher_id  String        @db.Uuid
+  subject_id  String?       @db.Uuid
+  start_time  DateTime
+  end_time    DateTime
+  status      SessionStatus @default(scheduled)
+  meeting_url String?       // Link a Meet/Zoom
+  notes       String?       @db.Text
+  created_at  DateTime      @default(now())
+
+  student User     @relation("StudentSessions", fields: [student_id], references: [id])
+  teacher User     @relation("TeacherSessions", fields: [teacher_id], references: [id])
+  subject Subject? @relation(fields: [subject_id], references: [id])
+}
+
+model Enrollment {
+  id                     String        @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  user_id                String        @db.Uuid
+  subject_id             String        @db.Uuid
+  payment_status         PaymentStatus @default(pending)
+  mercadopago_payment_id String?
+  created_at             DateTime      @default(now())
+
+  user    User    @relation(fields: [user_id], references: [id])
+  subject Subject @relation(fields: [subject_id], references: [id])
+
+  @@unique([user_id, subject_id])
+}
