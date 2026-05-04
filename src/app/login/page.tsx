@@ -22,10 +22,14 @@ export default function LoginPage() {
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-accent/20 rounded-full blur-[120px] -translate-y-1/3 translate-x-1/3 z-0 animate-pulse-slow"></div>
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-black/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3 z-0"></div>
 
-        <div className="relative z-10">
-          <Link href="/" className="inline-block group">
+        <div className="relative z-10 mb-8">
+          <Link href="/" className="inline-flex items-center gap-4 group">
             <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 transition-transform group-hover:scale-105 duration-500 shadow-bento">
-              <Image src="/logofn.png" alt="Omega logo" width={48} height={48} className="object-contain brightness-0 invert" />
+              <Image src="/logo1.png" alt="Omega logo" width={64} height={64} className="object-contain" />
+            </div>
+            <div className="flex flex-col -space-y-1">
+              <span className="text-3xl font-extrabold text-white tracking-tight">OMEGA</span>
+              <span className="text-lg font-bold text-accent tracking-widest">INSTITUTO</span>
             </div>
           </Link>
         </div>
@@ -81,9 +85,13 @@ export default function LoginPage() {
           className="w-full max-w-[420px]"
         >
           {/* Logo Mobile */}
-          <div className="md:hidden flex justify-center mb-8">
-             <div className="p-4 bg-card rounded-2xl shadow-bento border border-border">
-               <Image src="/logofn.png" alt="Omega logo" width={50} height={50} className="object-contain" />
+          <div className="md:hidden flex flex-col items-center justify-center mb-10 gap-3">
+             <div className="p-4 bg-background rounded-2xl shadow-sm border border-border">
+               <Image src="/logo1.png" alt="Omega logo" width={56} height={56} className="object-contain" />
+             </div>
+             <div className="flex flex-col text-center -space-y-0.5">
+                <span className="text-2xl font-extrabold text-foreground tracking-tight">OMEGA</span>
+                <span className="text-sm font-bold text-primary tracking-widest">INSTITUTO</span>
              </div>
           </div>
 
