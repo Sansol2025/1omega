@@ -65,7 +65,7 @@ export function NavigationTop({ role, userName, roleName }: NavigationTopProps) 
       {/* Logo Area */}
       <Link href={`/${role}`} className="flex items-center gap-3 group">
         <Image 
-          src="/logo1.png" 
+          src="/logofn.png" 
           alt="Omega Logo" 
           width={32} 
           height={32} 

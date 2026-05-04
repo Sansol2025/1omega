@@ -30,7 +30,7 @@ export default function LandingPage() {
       <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-[#0B0F19]/95 backdrop-blur-md py-4 shadow-xl" : "bg-transparent py-6"}`}>
         <div className="container mx-auto px-6 lg:px-12 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image src="/logo1.png" alt="Omega logo" width={32} height={32} className="object-contain" />
+            <Image src="/logofn.png" alt="Omega logo" width={32} height={32} className="object-contain" />
             <span className="text-xl font-extrabold tracking-tight">
               OMEGA <span className="text-primary">INSTITUTO</span>
             </span>
@@ -168,7 +168,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             <div className="lg:col-span-1 flex flex-col items-start">
               <div className="flex items-center gap-3 mb-6">
-                <Image src="/logo1.png" alt="Omega logo" width={32} height={32} className="object-contain" />
+                <Image src="/logofn.png" alt="Omega logo" width={32} height={32} className="object-contain" />
                 <span className="text-2xl font-extrabold text-white tracking-tight">OMEGA</span>
               </div>
               <p className="text-sm font-medium text-slate-500 mb-6 max-w-xs">

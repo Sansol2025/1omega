@@ -25,7 +25,7 @@ export default function LoginPage() {
         <div className="relative z-10 mb-8">
           <Link href="/" className="inline-flex items-center gap-4 group">
             <div className="bg-white/10 backdrop-blur-md p-4 rounded-2xl border border-white/20 transition-transform group-hover:scale-105 duration-500 shadow-bento">
-              <Image src="/logo1.png" alt="Omega logo" width={64} height={64} className="object-contain" />
+              <Image src="/logofn.png" alt="Omega logo" width={64} height={64} className="object-contain" />
             </div>
             <div className="flex flex-col -space-y-1">
               <span className="text-3xl font-extrabold text-white tracking-tight">OMEGA</span>
@@ -87,7 +87,7 @@ export default function LoginPage() {
           {/* Logo Mobile */}
           <div className="md:hidden flex flex-col items-center justify-center mb-10 gap-3">
              <div className="p-4 bg-background rounded-2xl shadow-sm border border-border">
-               <Image src="/logo1.png" alt="Omega logo" width={56} height={56} className="object-contain" />
+               <Image src="/logofn.png" alt="Omega logo" width={56} height={56} className="object-contain" />
              </div>
              <div className="flex flex-col text-center -space-y-0.5">
                 <span className="text-2xl font-extrabold text-foreground tracking-tight">OMEGA</span>
